@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Undangan Pernikahan</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="landing">
+    <!-- Background overlay -->
+    <div class="overlay"></div>
+
+    <!-- Konten tengah -->
+    <div class="hero-content">
+      <img src="images/logoutama.png" alt="Logo Mempelai" class="logo" />
+      <h1 class="fade-in">Nendahtian & Ruhyat</h1>
+      <p class="fade-in delay">04-05 Oktober 2025</p>
+
+      <!-- Countdown -->
+      <div id="countdown" class="countdown fade-in delay2"></div>
+
+      <!-- Tombol -->
+      <button onclick="openInvitation()" class="btn-glow fade-in delay3">Buka Undangan</button>
+    </div>
+
+    <script>
+      // Countdown
+      const targetDate = new Date('2025-10-04T08:00:00').getTime();
+      const countdown = document.getElementById('countdown');
+
+      function updateCountdown() {
+        const now = new Date().getTime();
+        const diff = targetDate - now;
+
+        if (diff <= 0) {
+          countdown.innerHTML = 'Hari ini acara dimulai 🎉';
+          return;
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        countdown.innerHTML = `
+          <span>${days} Hari</span> :
+          <span>${hours} Jam</span> :
+          <span>${minutes} Menit</span> :
+          <span>${seconds} Detik</span>
+        `;
+      }
+
+      setInterval(updateCountdown, 1000);
+      updateCountdown();
+
+      // Buka undangan
+      function openInvitation() {
+        window.location.href = 'main.html';
+      }
+    </script>
+  </body>
+</html>

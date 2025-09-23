@@ -1,0 +1,301 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #ffe6f0;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Hero Section */
+.hero {
+  position: relative;
+  height: 100vh;
+  background: url('img/bg.jpg') no-repeat center/cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.hero .overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 192, 203, 0.6);
+}
+
+.hero .content {
+  position: relative;
+  z-index: 1;
+  color: #333;
+}
+
+.hero .title {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.hero .date {
+  font-size: 1.5rem;
+  margin: 0.5rem 0;
+}
+
+.hero .invitation {
+  margin-bottom: 1rem;
+}
+
+button {
+  padding: 10px 20px;
+  background: #ff4da6;
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+button:hover {
+  transform: scale(1.1);
+}
+
+/* Section umum */
+.section {
+  padding: 50px 20px;
+  text-align: center;
+}
+
+.section h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #ff4da6;
+}
+
+/* Galeri */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
+}
+
+.gallery img {
+  width: 100%;
+  border-radius: 10px;
+  transition: transform 0.3s;
+}
+
+.gallery img:hover {
+  transform: scale(1.05);
+}
+
+/* Form ucapan */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 400px;
+  margin: auto;
+}
+
+input,
+textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+#ucapanList {
+  margin-top: 20px;
+  text-align: left;
+  max-width: 500px;
+  margin-inline: auto;
+}
+
+#ucapanList p {
+  background: #fff;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: url('images/bg.jpg.png') no-repeat center center fixed;
+  background-size: cover;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Mini hero */
+.mini-hero {
+  background: linear-gradient(135deg, #ffb6c1, #ffe6f0);
+  padding: 40px 20px;
+  text-align: center;
+  color: #333;
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.mini-hero h1 {
+  font-size: 2.5rem;
+  color: #ff4da6;
+}
+
+/* Cards acara & rekening */
+.cards {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 250px;
+  transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.rekening-card {
+  margin: auto;
+  max-width: 300px;
+}
+
+/* Animasi fade-in */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.fade-in.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== Halaman Landing ===== */
+body.landing {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url('images/bg.jpg.png') no-repeat center center/cover;
+  position: relative;
+  font-family: 'Poppins', sans-serif;
+  overflow: hidden;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: #fff;
+  animation: fadeUp 1.5s ease;
+}
+
+.logo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  margin-bottom: 20px;
+  object-fit: cover;
+}
+
+.hero-content h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+}
+
+/* Tombol Glow */
+.btn-glow {
+  padding: 12px 25px;
+  border: none;
+  border-radius: 30px;
+  font-size: 1rem;
+  cursor: pointer;
+  background: linear-gradient(45deg, #ff4da6, #ff85c1);
+  color: white;
+  box-shadow: 0 0 15px rgba(255, 77, 166, 0.6);
+  transition: all 0.3s;
+}
+
+.btn-glow:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(255, 77, 166, 0.8);
+}
+
+/* Animasi fade-in */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s forwards;
+}
+
+.delay {
+  animation-delay: 0.5s;
+}
+
+.delay2 {
+  animation-delay: 1s;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.countdown {
+  font-size: 1.2rem;
+  margin: 15px 0 30px;
+  color: #fff;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.countdown span {
+  background: rgba(255, 77, 166, 0.8);
+  padding: 8px 12px;
+  border-radius: 8px;
+  margin: 0 4px;
+  display: inline-block;
+}

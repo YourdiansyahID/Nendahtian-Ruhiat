@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Detail Undangan Hamdan & Rodi</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Hero mini -->
+    <header class="mini-hero">
+      <h1>Nendahtian & Ruhyat</h1>
+      <p>04-05 Oktober 2025</p>
+    </header>
+
+    <!-- Detail Acara -->
+    <section class="section acara fade-in">
+      <h2>Detail Acara</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>Akad</h3>
+          <p>Masjid Agung Jakarta</p>
+          <p>Pukul 10.00 WIB</p>
+        </div>
+        <div class="card">
+          <h3>Resepsi</h3>
+          <p>Gedung Serbaguna Jakarta</p>
+          <p>Pukul 13.00 WIB</p>
+        </div>
+      </div>
+      <div class="map-container">
+        <iframe src="https://www.google.com/maps?q=Masjid%20Agung%20Jakarta&output=embed" allowfullscreen loading="lazy"></iframe>
+      </div>
+    </section>
+
+    <!-- Galeri Foto -->
+    <section class="section galeri fade-in">
+      <h2>Galeri Foto</h2>
+      <div class="gallery">
+        <img src="images/foto1.jpg" alt="Foto 1" />
+        <img src="images/foto2.jpg" alt="Foto 2" />
+        <img src="img/photo3.jpg" alt="Foto 3" />
+        <img src="img/photo4.jpg" alt="Foto 4" />
+      </div>
+    </section>
+
+    <!-- Ucapan -->
+    <section class="section ucapan fade-in">
+      <h2>Ucapan & Doa</h2>
+      <form id="ucapanForm">
+        <input type="text" id="nama" placeholder="Nama Anda" required />
+        <textarea id="pesan" placeholder="Tulis ucapan..." required></textarea>
+        <button type="submit">Kirim</button>
+      </form>
+      <div id="ucapanList"></div>
+    </section>
+
+    <!-- Rekening -->
+    <section class="section rekening fade-in">
+      <h2>Rekening</h2>
+      <div class="card rekening-card">
+        <p><b>BCA</b></p>
+        <p>No: 1234567890</p>
+        <p>a.n. Hamdan Rodiansyah</p>
+      </div>
+    </section>
+
+    <!-- Musik -->
+    <audio id="bgMusic" autoplay loop>
+      <source src="music/background.mp3" type="audio/mpeg" />
+    </audio>
+
+    <script src="script.js"></script>
+  </body>
+</html>
