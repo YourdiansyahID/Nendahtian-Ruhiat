@@ -1,4 +1,7 @@
-/* Reset */
+/* ===== Import Font ===== */
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Great+Vibes&display=swap');
+
+/* ===== Reset ===== */
 * {
   margin: 0;
   padding: 0;
@@ -7,12 +10,47 @@
 
 body {
   font-family: 'Poppins', sans-serif;
-  background: #ffe6f0;
   color: #333;
   line-height: 1.6;
 }
 
-/* Hero Section */
+/* ===== Body Landing Page ===== */
+body.landing {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url('images/bg.png') no-repeat center center/cover;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ===== Hero Mini ===== */
+.mini-hero {
+  background: #ffe6f0; /* polos */
+  padding: 60px 20px;
+  text-align: center;
+  color: #ff4da6;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.mini-hero h1 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 3rem;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+  line-height: 1.2;
+}
+
+.mini-hero p {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 0;
+}
+
+/* ===== Hero Section (opsional) ===== */
 .hero {
   position: relative;
   height: 100vh;
@@ -26,7 +64,7 @@ body {
 .hero .overlay {
   position: absolute;
   inset: 0;
-  background: rgba(255, 192, 203, 0.6);
+  background: rgba(255, 255, 255, 0.6);
 }
 
 .hero .content {
@@ -49,21 +87,26 @@ body {
   margin-bottom: 1rem;
 }
 
-button {
-  padding: 10px 20px;
-  background: #ff4da6;
-  color: #fff;
+/* ===== Button umum ===== */
+button,
+.btn-glow {
+  padding: 12px 25px;
   border: none;
-  border-radius: 25px;
+  border-radius: 30px;
+  font-size: 1rem;
   cursor: pointer;
-  transition: transform 0.3s;
+  background: linear-gradient(45deg, #ff4da6, #ff85c1);
+  color: white;
+  transition: all 0.3s;
 }
 
-button:hover {
-  transform: scale(1.1);
+button:hover,
+.btn-glow:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(255, 77, 166, 0.8);
 }
 
-/* Section umum */
+/* ===== Section umum ===== */
 .section {
   padding: 50px 20px;
   text-align: center;
@@ -75,7 +118,7 @@ button:hover {
   color: #ff4da6;
 }
 
-/* Galeri */
+/* ===== Galeri ===== */
 .gallery {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -92,7 +135,7 @@ button:hover {
   transform: scale(1.05);
 }
 
-/* Form ucapan */
+/* ===== Form Ucapan ===== */
 form {
   display: flex;
   flex-direction: column;
@@ -122,31 +165,7 @@ textarea {
   margin-bottom: 10px;
 }
 
-body {
-  font-family: 'Poppins', sans-serif;
-  background: url('images/bg.jpg.png') no-repeat center center fixed;
-  background-size: cover;
-  color: #333;
-  line-height: 1.6;
-}
-
-/* Mini hero */
-.mini-hero {
-  background: linear-gradient(135deg, #ffb6c1, #ffe6f0);
-  padding: 40px 20px;
-  text-align: center;
-  color: #333;
-  border-bottom-left-radius: 40px;
-  border-bottom-right-radius: 40px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-}
-
-.mini-hero h1 {
-  font-size: 2.5rem;
-  color: #ff4da6;
-}
-
-/* Cards acara & rekening */
+/* ===== Cards acara & rekening ===== */
 .cards {
   display: flex;
   gap: 20px;
@@ -173,10 +192,10 @@ body {
   max-width: 300px;
 }
 
-/* Animasi fade-in */
+/* ===== Animasi Fade-in ===== */
 .fade-in {
   opacity: 0;
-  transform: translateY(30px);
+  transform: translateY(20px);
   transition: opacity 1s ease-out, transform 1s ease-out;
 }
 
@@ -185,92 +204,13 @@ body {
   transform: translateY(0);
 }
 
-/* ===== Halaman Landing ===== */
-body.landing {
-  margin: 0;
-  padding: 0;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: url('images/bg.jpg.png') no-repeat center center/cover;
-  position: relative;
-  font-family: 'Poppins', sans-serif;
-  overflow: hidden;
-}
-
-.overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.4);
-}
-
+/* ===== Hero-content Animasi ===== */
 .hero-content {
   position: relative;
   z-index: 2;
   text-align: center;
   color: #fff;
-  animation: fadeUp 1.5s ease;
-}
-
-.logo {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  border: 3px solid #fff;
-  margin-bottom: 20px;
-  object-fit: cover;
-}
-
-.hero-content h1 {
-  font-size: 2.5rem;
-  margin-bottom: 10px;
-  letter-spacing: 2px;
-}
-
-.hero-content p {
-  font-size: 1.2rem;
-  margin-bottom: 30px;
-}
-
-/* Tombol Glow */
-.btn-glow {
-  padding: 12px 25px;
-  border: none;
-  border-radius: 30px;
-  font-size: 1rem;
-  cursor: pointer;
-  background: linear-gradient(45deg, #ff4da6, #ff85c1);
-  color: white;
-  box-shadow: 0 0 15px rgba(255, 77, 166, 0.6);
-  transition: all 0.3s;
-}
-
-.btn-glow:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 25px rgba(255, 77, 166, 0.8);
-}
-
-/* Animasi fade-in */
-.fade-in {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 1s forwards;
-}
-
-.delay {
-  animation-delay: 0.5s;
-}
-
-.delay2 {
-  animation-delay: 1s;
-}
-
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  animation: fadeUp 1.5s ease forwards;
 }
 
 @keyframes fadeUp {
@@ -284,18 +224,75 @@ body.landing {
   }
 }
 
+/* ===== Countdown ===== */
 .countdown {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
   font-size: 1.2rem;
-  margin: 15px 0 30px;
   color: #fff;
   font-weight: bold;
   letter-spacing: 1px;
+  flex-wrap: wrap;
+  text-align: center;
+  margin-bottom: 30px;
 }
 
 .countdown span {
-  background: rgba(255, 77, 166, 0.8);
+  background: rgba(255, 77, 166, 0.3);
   padding: 8px 12px;
   border-radius: 8px;
-  margin: 0 4px;
   display: inline-block;
+  min-width: 60px;
+  text-align: center;
+}
+
+@media (max-width: 480px) {
+  .countdown {
+    font-size: 1rem;
+    gap: 6px;
+  }
+  .countdown span {
+    min-width: 50px;
+    padding: 6px 8px;
+  }
+}
+
+/* ===== Corner Assets / Dekorasi ===== */
+#corner-assets {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.corner-png {
+  position: fixed;
+  width: 120px;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
+  z-index: 10;
+}
+
+.corner-png.show {
+  opacity: 0.7;
+  transform: translateY(0);
+}
+
+.top-left {
+  top: 20px;
+  left: 20px;
+}
+.top-right {
+  top: 20px;
+  right: 20px;
+}
+.bottom-left {
+  bottom: 20px;
+  left: 20px;
+}
+.bottom-right {
+  bottom: 20px;
+  right: 20px;
 }

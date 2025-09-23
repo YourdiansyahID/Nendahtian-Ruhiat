@@ -1,3 +1,13 @@
+// Fade-out tombol Buka Undangan
+function openInvitationFade() {
+  const hero = document.querySelector('.hero-content'); // target elemen
+  hero.classList.add('fade-out'); // trigger animasi fade-out
+
+  setTimeout(() => {
+    window.location.href = 'main.html'; // pindah halaman setelah animasi
+  }, 800); // durasi animasi sesuai CSS
+}
+
 // Countdown
 function countdown() {
   const targetDate = new Date('2025-10-10T10:00:00').getTime();
@@ -30,7 +40,7 @@ window.addEventListener('scroll', () => {
   });
 });
 
-// Redirect ke halaman utama
+// Redirect lama (bisa tetap, tapi tombol baru pakai fade-out)
 function goToMain() {
   window.location.href = 'main.html';
 }
@@ -67,4 +77,32 @@ document.addEventListener('DOMContentLoaded', () => {
   if (document.getElementById('countdown')) {
     countdown();
   }
+  // Munculkan dekorasi setelah load
+  window.addEventListener('load', () => {
+    document.querySelectorAll('.corner-png').forEach((el, index) => {
+      setTimeout(() => {
+        el.classList.add('show');
+      }, 500 * index); // stagger effect tiap PNG
+    });
+  });
+
+  // Animasi fade-in saat scroll
+  window.addEventListener('scroll', () => {
+    document.querySelectorAll('.fade-in').forEach((el) => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight - 100) {
+        el.classList.add('show');
+      }
+    });
+  });
+
+  // Jalankan sekali saat halaman load, untuk section yang sudah terlihat
+  window.addEventListener('load', () => {
+    document.querySelectorAll('.fade-in').forEach((el) => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight - 100) {
+        el.classList.add('show');
+      }
+    });
+  });
 });

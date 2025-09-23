@@ -4,13 +4,89 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Undangan Pernikahan</title>
+
+    <!-- Tambahkan Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Great+Vibes&display=swap" rel="stylesheet" />
+
     <link rel="stylesheet" href="style.css" />
+    <style>
+      /* Animasi fade-out tombol */
+      .fade-out {
+        animation: fadeOut 0.8s forwards;
+      }
+      @keyframes fadeOut {
+        from {
+          opacity: 1;
+          transform: scale(1);
+        }
+        to {
+          opacity: 0;
+          transform: scale(0.95);
+        }
+      }
+
+      /* Animasi fade-in scroll */
+      .fade-in {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 1s ease-out, transform 1s ease-out;
+      }
+      .fade-in.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Container dekorasi */
+      #corner-assets {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 10;
+      }
+      .corner-png {
+        position: fixed;
+        width: 120px; /* diperbesar */
+        opacity: 0;
+        transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
+        z-index: 10;
+        opacity: 0.7; /* transparansi */
+      }
+      .corner-png.show {
+        opacity: 0.7;
+        transform: translateY(0);
+      }
+      .top-left {
+        top: 20px;
+        left: 20px;
+      }
+      .top-right {
+        top: 20px;
+        right: 20px;
+      }
+      .bottom-left {
+        bottom: 20px;
+        left: 20px;
+      }
+      .bottom-right {
+        bottom: 20px;
+        right: 20px;
+      }
+
+      /* Font untuk halaman awal */
+      .hero-content h1 {
+        font-family: 'Great Vibes', cursive;
+      }
+      .hero-content p {
+        font-family: 'Dancing Script', cursive;
+        font-weight: 700;
+      }
+    </style>
   </head>
   <body class="landing">
-    <!-- Background overlay -->
+    <!-- Overlay -->
     <div class="overlay"></div>
 
-    <!-- Konten tengah -->
+    <!-- Konten Tengah -->
     <div class="hero-content">
       <img src="images/logoutama.png" alt="Logo Mempelai" class="logo" />
       <h1 class="fade-in">Nendahtian & Ruhyat</h1>
@@ -19,44 +95,113 @@
       <!-- Countdown -->
       <div id="countdown" class="countdown fade-in delay2"></div>
 
-      <!-- Tombol -->
-      <button onclick="openInvitation()" class="btn-glow fade-in delay3">Buka Undangan</button>
+      <!-- Tombol Buka Undangan -->
+      <button onclick="openInvitationFade()" class="btn-glow fade-in delay3">Buka Undangan</button>
+    </div>
+
+    <!-- Dekorasi PNG -->
+    <div id="corner-assets">
+      <img src="images/flower1.png" class="corner-png top-left" alt="Dekorasi Kiri Atas" />
+      <img src="images/flower2.png" class="corner-png top-right" alt="Dekorasi Kanan Atas" />
+      <img src="images/flower3.png" class="corner-png bottom-left" alt="Dekorasi Kiri Bawah" />
+      <img src="images/dekor-bottom-right.png" class="corner-png bottom-right" alt="Dekorasi Kanan Bawah" />
     </div>
 
     <script>
+      // Fade-out tombol Buka Undangan
+      function openInvitationFade() {
+        const hero = document.querySelector('.hero-content');
+        hero.classList.add('fade-out');
+        hero.addEventListener(
+          'animationend',
+          () => {
+            window.location.href = 'main.html';
+          },
+          { once: true }
+        );
+      }
+
       // Countdown
-      const targetDate = new Date('2025-10-04T08:00:00').getTime();
-      const countdown = document.getElementById('countdown');
+      function countdown() {
+        const targetDate = new Date('2025-10-04T08:00:00').getTime();
+        const timer = setInterval(() => {
+          const now = new Date().getTime();
+          const distance = targetDate - now;
 
-      function updateCountdown() {
-        const now = new Date().getTime();
-        const diff = targetDate - now;
+          if (distance < 0) {
+            clearInterval(timer);
+            document.getElementById('countdown').innerHTML = 'Hari ini acara dimulai 🎉';
+            return;
+          }
 
-        if (diff <= 0) {
-          countdown.innerHTML = 'Hari ini acara dimulai 🎉';
-          return;
+          const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+          const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+          document.getElementById('countdown').innerHTML = `<span>${days} Hari</span> :
+                             <span>${hours} Jam</span> :
+                             <span>${minutes} Menit</span> :
+                             <span>${seconds} Detik</span>`;
+        }, 1000);
+      }
+
+      // Animasi fade-in scroll
+      function handleFadeIn() {
+        document.querySelectorAll('.fade-in').forEach((el) => {
+          const rect = el.getBoundingClientRect();
+          if (rect.top < window.innerHeight - 50) {
+            el.classList.add('show');
+          }
+        });
+      }
+
+      // Tampilkan dekorasi PNG
+      function showDecorations() {
+        document.querySelectorAll('.corner-png').forEach((el, index) => {
+          setTimeout(() => {
+            el.classList.add('show');
+          }, 500 * index);
+        });
+      }
+
+      // Setup ucapan
+      function setupUcapan() {
+        const form = document.getElementById('ucapanForm');
+        const list = document.getElementById('ucapanList');
+        if (!form) return;
+
+        const ucapan = JSON.parse(localStorage.getItem('ucapan')) || [];
+        renderUcapan();
+
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const nama = document.getElementById('nama').value;
+          const pesan = document.getElementById('pesan').value;
+          ucapan.push({ nama, pesan });
+          localStorage.setItem('ucapan', JSON.stringify(ucapan));
+          form.reset();
+          renderUcapan();
+        });
+
+        function renderUcapan() {
+          list.innerHTML = '';
+          ucapan.forEach((u) => {
+            const p = document.createElement('p');
+            p.innerHTML = `<b>${u.nama}</b>: ${u.pesan}`;
+            list.appendChild(p);
+          });
         }
-
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-        countdown.innerHTML = `
-          <span>${days} Hari</span> :
-          <span>${hours} Jam</span> :
-          <span>${minutes} Menit</span> :
-          <span>${seconds} Detik</span>
-        `;
       }
 
-      setInterval(updateCountdown, 1000);
-      updateCountdown();
+      document.addEventListener('DOMContentLoaded', () => {
+        if (document.getElementById('countdown')) countdown();
+        setupUcapan();
+        handleFadeIn(); // jalankan sekali saat load
+      });
 
-      // Buka undangan
-      function openInvitation() {
-        window.location.href = 'main.html';
-      }
+      window.addEventListener('scroll', handleFadeIn);
+      window.addEventListener('load', showDecorations);
     </script>
   </body>
 </html>
