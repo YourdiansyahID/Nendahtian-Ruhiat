@@ -418,6 +418,164 @@
           opacity: 0;
         }
       }
+      /* ===== Donasi Section ===== */
+      .donasi-section {
+        background: #fff9fc;
+        padding: 60px 20px;
+        border-radius: 20px;
+        max-width: 600px;
+        margin: 40px auto;
+        box-shadow: 0 8px 20px rgba(255, 77, 166, 0.15);
+      }
+
+      .donasi-section h2 {
+        font-family: 'Great Vibes', cursive;
+        font-size: 2.5rem;
+        margin-bottom: 15px;
+        color: #ff4da6;
+      }
+
+      .donasi-text {
+        font-size: 1rem;
+        margin-bottom: 25px;
+        color: #555;
+      }
+
+      .donasi-card {
+        background: #fff;
+        padding: 25px;
+        border-radius: 15px;
+        text-align: center;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        margin-bottom: 20px;
+      }
+
+      .donasi-logo {
+        width: 80px;
+        margin-bottom: 10px;
+      }
+
+      .donasi-card h3 {
+        font-size: 1.5rem;
+        color: #007fff;
+        margin-bottom: 5px;
+      }
+
+      .donasi-card .nomor {
+        font-size: 1.2rem;
+        font-weight: bold;
+        letter-spacing: 1px;
+        color: #333;
+        margin-bottom: 15px;
+      }
+
+      .donasi-note {
+        font-style: italic;
+        font-size: 0.95rem;
+        color: #777;
+      }
+      /* Section Detail Acara */
+      .detail-acara {
+        background: rgba(255, 255, 255, 0.9);
+        padding: 80px 20px;
+        text-align: center;
+        position: relative;
+      }
+
+      .detail-acara .section-title {
+        font-family: 'Dancing Script', cursive;
+        font-size: 2.5rem;
+        margin-bottom: 50px;
+        color: #b76e79;
+        position: relative;
+      }
+
+      .detail-acara .section-title::after {
+        content: '';
+        width: 80px;
+        height: 3px;
+        background: #b76e79;
+        display: block;
+        margin: 10px auto 0;
+        border-radius: 3px;
+      }
+
+      .acara-card {
+        background: #fff;
+        border-radius: 20px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        padding: 25px;
+        margin: 20px auto;
+        max-width: 500px;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        transform: translateY(50px);
+        opacity: 0;
+        transition: all 0.8s ease;
+      }
+
+      .acara-card.show {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      .acara-card .icon img {
+        width: 50px;
+        height: 50px;
+        object-fit: contain;
+      }
+
+      .acara-card .acara-content h3 {
+        font-size: 1.3rem;
+        color: #444;
+        margin-bottom: 8px;
+      }
+
+      .acara-card .acara-content p {
+        font-size: 1rem;
+        color: #666;
+        line-height: 1.6;
+      }
+      .flower-section {
+        position: relative;
+        min-height: 200px; /* pendek biar natural */
+        overflow: hidden;
+        background: transparent; /* tanpa background */
+      }
+
+      /* bunga */
+      .flower {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%) translateX(0);
+        opacity: 0;
+        transition: transform 1.5s ease, opacity 1.5s ease;
+      }
+
+      .flower img {
+        width: 140px;
+        opacity: 0.9;
+      }
+
+      .flower-left {
+        left: 0;
+        transform: translateY(-50%) translateX(-100px);
+      }
+      .flower-right {
+        right: 0;
+        transform: translateY(-50%) translateX(100px);
+      }
+
+      /* aktif saat di-scroll */
+      .flower-section.active .flower-left {
+        transform: translateY(-50%) translateX(0);
+        opacity: 1;
+      }
+      .flower-section.active .flower-right {
+        transform: translateY(-50%) translateX(0);
+        opacity: 1;
+      }
     </style>
   </head>
   <body>
@@ -439,6 +597,15 @@
         </div>
       </section>
     </div>
+    <!-- animasi bunga -->
+    <section class="flower-section">
+      <div class="flower flower-left">
+        <img src="images/flower1.png" alt="Bunga Kiri" />
+      </div>
+      <div class="flower flower-right">
+        <img src="images/flower2.png" alt="Bunga Kanan" />
+      </div>
+    </section>
 
     <!-- BIODATA MEMPELAI -->
     <div class="container">
@@ -449,36 +616,62 @@
           <div class="person">
             <img src="images/mempelai1.png" alt="Mempelai Pria" />
             <h3>Ruhyat</h3>
-            <p>Alm Putra dari Bapak Busro & Ibu Wiwi</p>
+            <p>Putra dari Alm Bapak Busro & Ibu Wiwi</p>
             <p>Kampung Cikondang Dsn. Bunter Ds. Cikareo Selatan Kec. Wado</p>
           </div>
           <!-- Mempelai Wanita -->
           <div class="person">
             <img src="images/mempelai2.png" alt="Mempelai Wanita" />
             <h3>Nendahtian</h3>
-            <p>Putri dari Bapak lili & Ibu Ratna Suminar</p>
+            <p>Putri dari Bapak Lili & Ibu Ratna Suminar</p>
             <p>Dsn Sukamanah 04/09 Ds. Sarimekar Kec. Jatinunggal</p>
           </div>
         </div>
       </section>
     </div>
 
-    <!-- DETAIL ACARA -->
-    <div class="container">
-      <section class="acara fade-in">
-        <h2>Detail Acara</h2>
-        <div class="cards">
-          <div class="card">
+    <!-- Section Detail Acara -->
+    <section class="detail-acara" id="acara">
+      <div class="container">
+        <h2 class="section-title">Detail Acara</h2>
+        <div class="acara-card">
+          <div class="icon">
+            <img src="images/kalender.jpg" alt="Tanggal" />
+          </div>
+          <div class="acara-content">
             <h3>Akad Nikah</h3>
-            <p><strong>Sabtu - Minggu, 04 - 05 Oktober 2025</strong></p>
-            <p>Rumah Mempelai Wanita</p>
-            <p>Dsn. Sukamanah 04/09, Desa Sarimekar</p>
-            <p>Kecamatan Jatinunggal</p>
-            <p>Pukul 08.00 WIB - SD Selesai</p>
+            <p class="tanggal">
+              Sabtu - Minggu, <br />
+              <strong>04 - 05 Oktober 2025</strong>
+            </p>
           </div>
         </div>
-      </section>
-    </div>
+
+        <div class="acara-card">
+          <div class="icon">
+            <img src="images/rumah.jpg" alt="Lokasi" />
+          </div>
+          <div class="acara-content">
+            <h3>Lokasi</h3>
+            <p>
+              Rumah Mempelai Wanita <br />
+              Dsn. Sukamanah 04/09, Desa Sarimekar <br />
+              Kecamatan Jatinunggal
+            </p>
+          </div>
+        </div>
+
+        <div class="acara-card">
+          <div class="icon">
+            <img src="images/jam.png" alt="Waktu" />
+          </div>
+          <div class="acara-content">
+            <h3>Waktu</h3>
+            <p>Pukul <strong>08.00 WIB</strong> - selesai</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- MAPS -->
     <div class="container">
@@ -566,6 +759,21 @@
       </section>
     </div>
 
+    <!-- Section Donasi -->
+    <section id="donasi" class="section donasi-section fade-in">
+      <h2>Tanda Kasih</h2>
+      <p class="donasi-text">Tanpa mengurangi rasa hormat, bagi Bapak/Ibu/Saudara/i yang ingin memberikan tanda kasih untuk kedua mempelai, dapat melalui e-wallet berikut:</p>
+
+      <div class="donasi-card">
+        <img src="images/dana.png" alt="Logo Dana" class="donasi-logo" />
+        <h3>DANA A.N Lili</h3>
+        <p class="nomor">0857-4977-2106</p>
+        <button class="btn-glow" onclick="copyRekening('081234567890')">Salin Nomor</button>
+      </div>
+
+      <p class="donasi-note">Doa restu Anda adalah hadiah terindah bagi kami. Semoga kebaikan Anda mendapatkan balasan berlipat ganda.</p>
+    </section>
+
     <!-- FOOTER -->
     <div class="container">
       <footer class="fade-in">
@@ -607,6 +815,36 @@
         item.innerHTML = `<strong>${n}</strong><div style="margin-top:8px">${p}</div>`;
         list.prepend(item);
         form.reset();
+      });
+      document.addEventListener('scroll', function () {
+        const cards = document.querySelectorAll('.acara-card');
+        const triggerBottom = window.innerHeight * 0.85;
+
+        cards.forEach((card) => {
+          const cardTop = card.getBoundingClientRect().top;
+          if (cardTop < triggerBottom) {
+            card.classList.add('show');
+          } else {
+            card.classList.remove('show');
+          }
+        });
+      });
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('active');
+            } else {
+              entry.target.classList.remove('active');
+            }
+          });
+        },
+        { threshold: 0.25 }
+      );
+
+      document.querySelectorAll('.flower-section').forEach((section) => {
+        observer.observe(section);
       });
 
       // Musik
