@@ -576,6 +576,58 @@
         transform: translateY(-50%) translateX(0);
         opacity: 1;
       }
+      .lihat-ucapan {
+        text-align: center;
+        margin: 50px 0;
+      }
+
+      #btnUcapan {
+        background: linear-gradient(135deg, #ff99cc, #ff66b2);
+        color: white;
+        font-size: 1.2rem;
+        padding: 15px 30px;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        box-shadow: 0 8px 20px rgba(255, 102, 178, 0.3);
+        transition: transform 0.3s ease, opacity 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      #btnUcapan:hover {
+        transform: scale(1.05);
+        box-shadow: 0 12px 25px rgba(255, 102, 178, 0.4);
+      }
+
+      /* Efek partikel */
+      .particle {
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        background: rgba(255, 182, 193, 0.9);
+        border-radius: 50%;
+        pointer-events: none;
+        animation: fly 1s forwards;
+      }
+
+      @keyframes fly {
+        to {
+          transform: translate(var(--x), var(--y)) scale(0.5);
+          opacity: 0;
+        }
+      }
+
+      .fade-out {
+        animation: fadeOutBtn 1s forwards;
+      }
+
+      @keyframes fadeOutBtn {
+        to {
+          opacity: 0;
+          transform: scale(0.7);
+        }
+      }
     </style>
   </head>
   <body>
@@ -759,6 +811,11 @@
       </section>
     </div>
 
+    <!-- Do'a Para Tamu -->
+    <section class="lihat-ucapan">
+      <button id="btnUcapan">💌 Lihat Ucapan & Doa</button>
+    </section>
+
     <!-- Section Donasi -->
     <section id="donasi" class="section donasi-section fade-in">
       <h2>Tanda Kasih</h2>
@@ -792,7 +849,64 @@
     </audio>
     <button id="musicToggle">🎵</button>
 
-    <script>
+    <script type="module">
+      // Import Firebase SDK
+      import { initializeApp } from 'https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js';
+      import { getDatabase, ref, push, set } from 'https://www.gstatic.com/firebasejs/12.3.0/firebase-database.js';
+
+      // Konfigurasi Firebase
+      const firebaseConfig = {
+        apiKey: 'AIzaSyAxEuVW_xAStOP2GCzVYCI4-y8zt1dnY7o',
+        authDomain: 'kartuucapan-b4744.firebaseapp.com',
+        databaseURL: 'https://kartuucapan-b4744-default-rtdb.asia-southeast1.firebasedatabase.app',
+        projectId: 'kartuucapan-b4744',
+        storageBucket: 'kartuucapan-b4744.firebasestorage.app',
+        messagingSenderId: '782820745703',
+        appId: '1:782820745703:web:1df44ad9bf59e4ab161d42',
+      };
+
+      // Inisialisasi Firebase
+      const app = initializeApp(firebaseConfig);
+      const db = getDatabase(app);
+
+      // Tangkap form & list
+      const form = document.getElementById('ucapanForm');
+      const list = document.getElementById('ucapanList');
+
+      // Submit handler
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const nama = document.getElementById('nama').value.trim();
+        const pesan = document.getElementById('pesan').value.trim();
+
+        if (!nama || !pesan) return;
+
+        // Simpan ke Firebase
+        const ucapanRef = ref(db, 'ucapan');
+        const newUcapanRef = push(ucapanRef);
+
+        set(newUcapanRef, {
+          nama: nama,
+          pesan: pesan,
+          timestamp: Date.now(),
+        })
+          .then(() => {
+            alert('✅ Ucapan berhasil dikirim!');
+
+            // Opsional: tampilkan langsung
+            const item = document.createElement('div');
+            item.className = 'item';
+            item.innerHTML = `<strong>${nama}</strong><div style="margin-top:8px">${pesan}</div>`;
+            list.prepend(item);
+
+            form.reset();
+          })
+          .catch((error) => {
+            alert('❌ Gagal mengirim: ' + error.message);
+          });
+      });
+
       // Fade-in scroll
       function fadeInOnScroll() {
         document.querySelectorAll('.fade-in').forEach((el) => {
@@ -802,20 +916,7 @@
       window.addEventListener('load', fadeInOnScroll);
       window.addEventListener('scroll', fadeInOnScroll);
 
-      // Ucapan
-      const form = document.getElementById('ucapanForm');
-      const list = document.getElementById('ucapanList');
-      form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const n = document.getElementById('nama').value.trim();
-        const p = document.getElementById('pesan').value.trim();
-        if (!n || !p) return;
-        const item = document.createElement('div');
-        item.className = 'item';
-        item.innerHTML = `<strong>${n}</strong><div style="margin-top:8px">${p}</div>`;
-        list.prepend(item);
-        form.reset();
-      });
+      // Animasi card acara
       document.addEventListener('scroll', function () {
         const cards = document.querySelectorAll('.acara-card');
         const triggerBottom = window.innerHeight * 0.85;
@@ -830,6 +931,32 @@
         });
       });
 
+      // Efek tombol ke halaman ucapan
+      const btnUcapan = document.getElementById('btnUcapan');
+      if (btnUcapan) {
+        btnUcapan.addEventListener('click', () => {
+          for (let i = 0; i < 30; i++) {
+            const particle = document.createElement('span');
+            particle.className = 'particle';
+            const angle = Math.random() * 2 * Math.PI;
+            const radius = 80 + Math.random() * 80;
+            particle.style.setProperty('--x', `${Math.cos(angle) * radius}px`);
+            particle.style.setProperty('--y', `${Math.sin(angle) * radius}px`);
+            particle.style.left = '50%';
+            particle.style.top = '50%';
+            btnUcapan.appendChild(particle);
+
+            setTimeout(() => particle.remove(), 1000);
+          }
+
+          btnUcapan.classList.add('fade-out');
+          setTimeout(() => {
+            window.location.href = 'ucapan.html';
+          }, 1200);
+        });
+      }
+
+      // Observer untuk flower-section
       const observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
@@ -842,35 +969,36 @@
         },
         { threshold: 0.25 }
       );
-
       document.querySelectorAll('.flower-section').forEach((section) => {
         observer.observe(section);
       });
 
       // Musik
       const music = document.getElementById('bgMusic');
-      const btn = document.getElementById('musicToggle');
+      const musicBtn = document.getElementById('musicToggle'); // ubah nama variabel agar tidak bentrok
       let playing = false;
+
       document.addEventListener('DOMContentLoaded', () => {
         music
           .play()
           .then(() => {
             playing = true;
-            btn.textContent = '⏸️';
+            musicBtn.textContent = '⏸️';
           })
           .catch(() => {
-            btn.textContent = '🎵';
+            musicBtn.textContent = '🎵';
           });
       });
-      btn.addEventListener('click', () => {
+
+      musicBtn.addEventListener('click', () => {
         if (playing) {
           music.pause();
           playing = false;
-          btn.textContent = '🎵';
+          musicBtn.textContent = '🎵';
         } else {
           music.play().then(() => {
             playing = true;
-            btn.textContent = '⏸️';
+            musicBtn.textContent = '⏸️';
           });
         }
       });

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ucapan & Doa</title>
+    <style>
+      /* Reset */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #ffd6e8, #ffe6f0);
+        color: #333;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 40px 20px;
+      }
+
+      .container {
+        max-width: 800px;
+        width: 100%;
+      }
+
+      h1 {
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+        color: #d63384;
+        animation: fadeInDown 1s ease-out;
+      }
+
+      .ucapan-list {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .ucapan-item {
+        background: white;
+        border-radius: 20px;
+        padding: 20px;
+        box-shadow: 0 8px 20px rgba(214, 51, 132, 0.15);
+        transform: translateY(30px);
+        opacity: 0;
+        animation: slideUp 0.8s ease forwards;
+      }
+
+      .ucapan-item strong {
+        color: #d63384;
+        font-size: 1.2rem;
+      }
+
+      .ucapan-item p {
+        margin-top: 8px;
+        line-height: 1.5;
+      }
+
+      .ucapan-item:hover {
+        transform: scale(1.03);
+        box-shadow: 0 12px 25px rgba(214, 51, 132, 0.25);
+        transition: all 0.3s ease;
+      }
+
+      .footer-quote {
+        margin-top: 40px;
+        text-align: center;
+        font-style: italic;
+        color: #555;
+        font-size: 1rem;
+        opacity: 0;
+        animation: fadeIn 2s ease forwards;
+        animation-delay: 1s;
+      }
+
+      /* Animations */
+      @keyframes slideUp {
+        from {
+          transform: translateY(30px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      @keyframes fadeInDown {
+        from {
+          transform: translateY(-30px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Ucapan & Doa</h1>
+      <div id="ucapanList" class="ucapan-list"></div>
+      <div class="footer-quote">"Terima kasih atas doa dan ucapan indah yang telah diberikan. Semoga kebaikan kembali kepada kita semua."</div>
+    </div>
+
+    <script type="module">
+      // Import Firebase
+      import { initializeApp } from 'https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js';
+      import { getDatabase, ref, onValue } from 'https://www.gstatic.com/firebasejs/12.3.0/firebase-database.js';
+
+      // Konfigurasi Firebase (sama dengan project kamu)
+      const firebaseConfig = {
+        apiKey: 'AIzaSyAxEuVW_xAStOP2GCzVYCI4-y8zt1dnY7o',
+        authDomain: 'kartuucapan-b4744.firebaseapp.com',
+        databaseURL: 'https://kartuucapan-b4744-default-rtdb.asia-southeast1.firebasedatabase.app',
+        projectId: 'kartuucapan-b4744',
+        storageBucket: 'kartuucapan-b4744.firebasestorage.app',
+        messagingSenderId: '782820745703',
+        appId: '1:782820745703:web:1df44ad9bf59e4ab161d42',
+      };
+
+      // Inisialisasi Firebase
+      const app = initializeApp(firebaseConfig);
+      const db = getDatabase(app);
+
+      // Ambil data ucapan
+      const ucapanList = document.getElementById('ucapanList');
+      const ucapanRef = ref(db, 'ucapan');
+
+      onValue(ucapanRef, (snapshot) => {
+        ucapanList.innerHTML = ''; // Kosongkan dulu
+        const data = snapshot.val();
+        if (data) {
+          // Konversi ke array & urutkan berdasarkan waktu terbaru
+          const items = Object.values(data).sort((a, b) => b.timestamp - a.timestamp);
+          items.forEach((item, index) => {
+            const div = document.createElement('div');
+            div.className = 'ucapan-item';
+            div.style.animationDelay = `${index * 0.1}s`;
+            div.innerHTML = `
+            <strong>${item.nama}</strong>
+            <p>${item.pesan}</p>
+          `;
+            ucapanList.appendChild(div);
+          });
+        } else {
+          ucapanList.innerHTML = "<p style='text-align:center; color:#777;'>Belum ada ucapan.</p>";
+        }
+      });
+    </script>
+  </body>
+</html>
